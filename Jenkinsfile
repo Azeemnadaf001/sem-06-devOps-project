@@ -8,30 +8,14 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh '''
-                    npm install --prefix server
-                    npm run build --prefix server
-                '''
-            }
-        }
-
-        stage('Deploy to EC2') {
+        stage('Deploy') {
             steps {
                 sh '''
                     ssh -i ${EC2_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "
                         cd ~/ecommerce
                         git pull origin main
-                        docker compose restart backend
-                        sleep 5
-                        echo 'Backend restarted successfully'
+                        docker compose up -d --build
+                        echo 'Deployment completed successfully'
                     "
                 '''
             }
@@ -43,7 +27,7 @@ pipeline {
             deleteDir()
         }
         success {
-            echo 'Pipeline succeeded! Backend deployed to EC2'
+            echo 'Pipeline succeeded! Application deployed to EC2'
         }
         failure {
             echo 'Pipeline failed! Check logs for details'
