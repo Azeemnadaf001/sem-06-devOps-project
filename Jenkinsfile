@@ -17,9 +17,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    cd server
-                    npm install
-                    npm run build
+                    npm install --prefix server
+                    npm run build --prefix server
                 '''
             }
         }
