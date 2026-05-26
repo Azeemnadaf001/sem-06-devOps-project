@@ -4,7 +4,7 @@ pipeline {
     environment {
         EC2_HOST = '13.233.53.119'
         EC2_USER = 'ubuntu'
-        EC2_KEY = '/var/jenkins_home/.ssh/ec2-key-devOps.pem'
+        EC2_KEY = '/var/jenkins_home/.ssh/id_rsa'
     }
 
     stages {
