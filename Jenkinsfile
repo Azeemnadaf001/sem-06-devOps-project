@@ -14,54 +14,34 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                script {
-                    sh 'docker build -t devops-backend:${BUILD_NUMBER} .'
-                    sh 'docker tag devops-backend:${BUILD_NUMBER} devops-backend:latest'
-                }
-            }
-        }
-
-        stage('Test Build') {
-            steps {
-                script {
-                    sh '''
-                        docker run --rm devops-backend:latest npm run build
-                    '''
-                }
-            }
-        }
-
-        stage('Save Image') {
-            steps {
-                script {
-                    sh 'docker save devops-backend:latest -o backend.tar'
-                }
+                sh '''
+                    cd server
+                    npm install
+                    npm run build
+                '''
             }
         }
 
         stage('Deploy to EC2') {
             steps {
-                script {
-                    sh '''
-                        scp -i ${EC2_KEY} -o StrictHostKeyChecking=no backend.tar ${EC2_USER}@${EC2_HOST}:~/ecommerce/
-                        ssh -i ${EC2_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "
-                            cd ~/ecommerce
-                            docker load -i backend.tar
-                            docker compose restart backend
-                            sleep 5
-                            echo 'Backend restarted successfully'
-                        "
-                    '''
-                }
+                sh '''
+                    ssh -i ${EC2_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "
+                        cd ~/ecommerce
+                        git pull origin main
+                        docker compose restart backend
+                        sleep 5
+                        echo 'Backend restarted successfully'
+                    "
+                '''
             }
         }
     }
 
     post {
         always {
-            cleanWs()
+            deleteDir()
         }
         success {
             echo 'Pipeline succeeded! Backend deployed to EC2'
