@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_HOST = '13.235.24.234'
+        EC2_HOST = '13.233.53.119'
         EC2_USER = 'ubuntu'
         EC2_KEY = '/var/jenkins_home/.ssh/ec2-key-devOps.pem'
     }
