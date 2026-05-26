@@ -14,8 +14,8 @@ pipeline {
                     ssh -i ${EC2_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "
                         cd ~/ecommerce
                         git pull origin main
-                        docker compose up -d --build
-                        echo 'Deployment completed successfully'
+                        docker compose up -d --build frontend
+                        echo 'Frontend deployment completed successfully'
                     "
                 '''
             }
@@ -27,7 +27,7 @@ pipeline {
             deleteDir()
         }
         success {
-            echo 'Pipeline succeeded! Application deployed to EC2'
+            echo 'Pipeline succeeded! Frontend deployed to EC2'
         }
         failure {
             echo 'Pipeline failed! Check logs for details'
