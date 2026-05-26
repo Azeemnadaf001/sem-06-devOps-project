@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_HOST = '13.233.53.119'
+        EC2_HOST = '3.111.252.209'
         EC2_USER = 'ubuntu'
         EC2_KEY = '/var/jenkins_home/.ssh/id_rsa'
     }
