@@ -16,7 +16,8 @@ export const products: Product[] = [
     id: "1",
     name: "Wireless Headphones",
     price: 199.99,
-    image: "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/headphones.jpg",
+    image:
+      "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/headphones.jpg",
     images: [
       "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/headphones.jpg",
       "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/headphones.jpg",
@@ -31,7 +32,8 @@ export const products: Product[] = [
     id: "2",
     name: "Mechanical Keyboard",
     price: 89.99,
-    image: "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/keyboard.jpg",
+    image:
+      "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/keyboard.jpg",
     images: [
       "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/keyboard.jpg",
       "https://ecommerce-products-dev.s3.ap-south-1.amazonaws.com/keyboard.jpg",

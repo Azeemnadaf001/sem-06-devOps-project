@@ -8,10 +8,13 @@
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
-    "fastify": "^5.2.0"
+    "dotenv": "^17.4.2",
+    "fastify": "^5.2.0",
+    "mongoose": "^9.6.3"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.19.19",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }
